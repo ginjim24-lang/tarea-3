@@ -6,5 +6,26 @@
   </head>
   <body>
     <h1>{{ message }}</h1>
+
+    {% if errores %}
+    <ul style="color: red;">
+      {% for error in errores %}
+      <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    <h2>Comparar información de referencia vs. etiqueta</h2>
+    <form action="/comparar" method="post" enctype="multipart/form-data">
+      <p>
+        <label for="referencia">Información escrita de referencia (PDF):</label><br />
+        <input type="file" id="referencia" name="referencia" accept="application/pdf" required />
+      </p>
+      <p>
+        <label for="etiqueta">Arte de la etiqueta del producto (PDF):</label><br />
+        <input type="file" id="etiqueta" name="etiqueta" accept="application/pdf" required />
+      </p>
+      <button type="submit">Comparar</button>
+    </form>
   </body>
 </html>
