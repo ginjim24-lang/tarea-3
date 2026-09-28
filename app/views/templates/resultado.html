@@ -4,13 +4,23 @@
     <meta charset="utf-8" />
     <title>Resultado - Tarea 3</title>
     <style>
-      pre {
+      .documento {
         background: #f4f4f4;
         padding: 1rem;
-        white-space: pre-wrap;
-        word-wrap: break-word;
+        line-height: 1.8;
         max-height: 400px;
         overflow-y: auto;
+      }
+      mark.falta {
+        background: #ffb3b3; /* falta en la etiqueta */
+      }
+      mark.extra {
+        background: #a3d9ff; /* aparece solo en la etiqueta */
+      }
+      .leyenda span {
+        padding: 0.2rem 0.5rem;
+        margin-right: 1rem;
+        border-radius: 4px;
       }
     </style>
   </head>
@@ -21,21 +31,28 @@
       <li>Arte de la etiqueta: {{ etiqueta_nombre }}</li>
     </ul>
 
-    <h2>Texto extraído de la información de referencia</h2>
-    {% if texto_referencia %}
-    <pre>{{ texto_referencia }}</pre>
-    {% else %}
-    <p><em>No se pudo extraer texto de este PDF (puede ser una imagen escaneada).</em></p>
-    {% endif %}
+    <h2>Comparación</h2>
+    <p class="leyenda">
+      <span style="background: #ffb3b3;">Rojo: está en la referencia y falta en la etiqueta</span>
+      <span style="background: #a3d9ff;">Azul: está en la etiqueta y no está en la referencia</span>
+    </p>
 
-    <h2>Texto extraído del arte de la etiqueta</h2>
-    {% if texto_etiqueta %}
-    <pre>{{ texto_etiqueta }}</pre>
-    {% else %}
-    <p><em>No se pudo extraer texto de este PDF (puede ser una imagen escaneada).</em></p>
-    {% endif %}
+    <h3>Información de referencia</h3>
+    <div class="documento">
+      {% for palabra in palabras_referencia %}
+        {% if palabra.estado == "falta_en_etiqueta" %}<mark class="falta">{{ palabra.texto }}</mark
+        >{% else %}{{ palabra.texto }}{% endif %}
+      {% endfor %}
+    </div>
 
-    <p>La comparación entre los documentos se implementará en la siguiente etapa.</p>
+    <h3>Arte de la etiqueta</h3>
+    <div class="documento">
+      {% for palabra in palabras_etiqueta %}
+        {% if palabra.estado == "solo_en_etiqueta" %}<mark class="extra">{{ palabra.texto }}</mark
+        >{% else %}{{ palabra.texto }}{% endif %}
+      {% endfor %}
+    </div>
+
     <p><a href="/">Volver a subir archivos</a></p>
   </body>
 </html>

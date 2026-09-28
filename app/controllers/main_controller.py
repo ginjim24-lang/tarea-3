@@ -1,5 +1,6 @@
 from flask import Blueprint, current_app, render_template, request
 
+from app.models.comparator import Comparator
 from app.models.document import Document
 from app.models.message import Message
 
@@ -34,10 +35,14 @@ def comparar():
     texto_referencia = referencia.extract_text()
     texto_etiqueta = etiqueta.extract_text()
 
+    palabras_referencia, palabras_etiqueta = Comparator.comparar(
+        texto_referencia, texto_etiqueta
+    )
+
     return render_template(
         "resultado.html",
         referencia_nombre=referencia.filename,
         etiqueta_nombre=etiqueta.filename,
-        texto_referencia=texto_referencia,
-        texto_etiqueta=texto_etiqueta,
+        palabras_referencia=palabras_referencia,
+        palabras_etiqueta=palabras_etiqueta,
     )
