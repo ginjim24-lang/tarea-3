@@ -17,6 +17,9 @@
       mark.extra {
         background: #a3d9ff; /* aparece solo en la etiqueta */
       }
+      mark.ortografia {
+        background: #fff59d; /* posible falta ortografica */
+      }
       .leyenda span {
         padding: 0.2rem 0.5rem;
         margin-right: 1rem;
@@ -35,6 +38,7 @@
     <p class="leyenda">
       <span style="background: #ffb3b3;">Rojo: está en la referencia y falta en la etiqueta</span>
       <span style="background: #a3d9ff;">Azul: está en la etiqueta y no está en la referencia</span>
+      <span style="background: #fff59d;">Amarillo: posible falta ortográfica en la etiqueta</span>
     </p>
 
     <h3>Información de referencia</h3>
@@ -48,10 +52,22 @@
     <h3>Arte de la etiqueta</h3>
     <div class="documento">
       {% for palabra in palabras_etiqueta %}
-        {% if palabra.estado == "solo_en_etiqueta" %}<mark class="extra">{{ palabra.texto }}</mark
+        {% if palabra.es_sospechosa %}<mark class="ortografia">{{ palabra.texto }}</mark
+        >{% elif palabra.estado == "solo_en_etiqueta" %}<mark class="extra">{{ palabra.texto }}</mark
         >{% else %}{{ palabra.texto }}{% endif %}
       {% endfor %}
     </div>
+
+    <h3>Posibles faltas ortográficas en la etiqueta</h3>
+    {% if palabras_sospechosas %}
+    <ul>
+      {% for palabra in palabras_sospechosas %}
+      <li>{{ palabra }}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No se detectaron palabras sospechosas.</p>
+    {% endif %}
 
     <p><a href="/">Volver a subir archivos</a></p>
   </body>

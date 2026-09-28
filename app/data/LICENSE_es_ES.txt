@@ -1,0 +1,9 @@
+Diccionario ortografico en español (es_ES.dic / es_ES.aff)
+
+Origen: proyecto de diccionarios de LibreOffice (paquete "hunspell-es" de
+Debian/Ubuntu), autor Santiago Bosio y colaboradores.
+
+Licencia: GPL-3+ o LGPL-3+ o MPL-1.1+ (a elección de quien lo redistribuye).
+
+Se incluye aqui sin modificaciones para que la app pueda revisar ortografia
+sin depender de que el sistema donde corre tenga Hunspell instalado.

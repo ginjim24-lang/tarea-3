@@ -17,6 +17,9 @@
       mark.extra {
         background: #a3d9ff; /* aparece solo en la etiqueta */
       }
+      mark.ortografia {
+        background: #fff59d; /* posible falta ortografica */
+      }
       .leyenda span {
         padding: 0.2rem 0.5rem;
         margin-right: 1rem;
@@ -35,6 +38,7 @@
     <p class="leyenda">
       <span style="background: #ffb3b3;">Rojo: está en la referencia y falta en la etiqueta</span>
       <span style="background: #a3d9ff;">Azul: está en la etiqueta y no está en la referencia</span>
+      <span style="background: #fff59d;">Amarillo: posible falta ortográfica en la etiqueta</span>
     </p>
 
     <h3>Información de referencia</h3>
@@ -63,7 +67,8 @@
       
         Ingredientes:
       
-        Harina
+        <mark class="falta">Harina</mark
+        >
       
         de
       
@@ -71,9 +76,8 @@
       
         avena,
       
-        azucar,
-      
-        aceite
+        <mark class="falta">aceite</mark
+        >
       
         vegetal,
       
@@ -86,7 +90,7 @@
         <mark class="falta">de</mark
         >
       
-        <mark class="falta">hornear.</mark
+        <mark class="falta">hornear</mark
         >
       
         Contenido
@@ -96,6 +100,24 @@
         200
       
         g
+      
+        Energía:
+      
+        450
+      
+        kcal
+      
+        por
+      
+        100
+      
+        g
+      
+        Sodio:
+      
+        150
+      
+        mg
       
         <mark class="falta">Alergenos:</mark
         >
@@ -124,21 +146,22 @@
     <h3>Arte de la etiqueta</h3>
     <div class="documento">
       
-        <mark class="extra">Etiqueta</mark
+        <mark class="extra">ETIQUETA</mark
         >
       
         <mark class="extra">-</mark
         >
       
-        Galletas
+        GALLETAS
       
-        de
+        DE
       
-        Avena
+        AVENA
       
         Ingredientes:
       
-        Harina
+        <mark class="ortografia">Arina</mark
+        >
       
         de
       
@@ -146,13 +169,12 @@
       
         avena,
       
-        azucar,
-      
-        aceite
+        <mark class="ortografia">aciete</mark
+        >
       
         vegetal,
       
-        <mark class="extra">sal.</mark
+        <mark class="extra">sal</mark
         >
       
         Contenido
@@ -163,11 +185,40 @@
       
         g
       
+        Energía:
+      
+        450
+      
+        kcal
+      
+        por
+      
+        100
+      
+        g
+      
+        Sodio:
+      
+        150
+      
+        mg
+      
         Contiene
       
         gluten.
       
     </div>
+
+    <h3>Posibles faltas ortográficas en la etiqueta</h3>
+    
+    <ul>
+      
+      <li>Arina</li>
+      
+      <li>aciete</li>
+      
+    </ul>
+    
 
     <p><a href="/">Volver a subir archivos</a></p>
   </body>

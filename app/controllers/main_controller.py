@@ -3,6 +3,7 @@ from flask import Blueprint, current_app, render_template, request
 from app.models.comparator import Comparator
 from app.models.document import Document
 from app.models.message import Message
+from app.models.spell_checker import RevisorOrtografico
 
 main_bp = Blueprint("main", __name__)
 
@@ -39,10 +40,23 @@ def comparar():
         texto_referencia, texto_etiqueta
     )
 
+    _, palabras_sospechosas = RevisorOrtografico.revisar(texto_etiqueta)
+    sospechosas_set = set(palabras_sospechosas)
+
+    palabras_etiqueta_vista = [
+        {
+            "texto": palabra.texto,
+            "estado": palabra.estado,
+            "es_sospechosa": palabra.texto in sospechosas_set,
+        }
+        for palabra in palabras_etiqueta
+    ]
+
     return render_template(
         "resultado.html",
         referencia_nombre=referencia.filename,
         etiqueta_nombre=etiqueta.filename,
         palabras_referencia=palabras_referencia,
-        palabras_etiqueta=palabras_etiqueta,
+        palabras_etiqueta=palabras_etiqueta_vista,
+        palabras_sospechosas=palabras_sospechosas,
     )
