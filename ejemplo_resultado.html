@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Resultado - Tarea 3</title>
+    <style>
+      .documento {
+        background: #f4f4f4;
+        padding: 1rem;
+        line-height: 1.8;
+        max-height: 400px;
+        overflow-y: auto;
+      }
+      mark.falta {
+        background: #ffb3b3; /* falta en la etiqueta */
+      }
+      mark.extra {
+        background: #a3d9ff; /* aparece solo en la etiqueta */
+      }
+      .leyenda span {
+        padding: 0.2rem 0.5rem;
+        margin-right: 1rem;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Archivos recibidos correctamente</h1>
+    <ul>
+      <li>Información de referencia: referencia.pdf</li>
+      <li>Arte de la etiqueta: etiqueta.pdf</li>
+    </ul>
+
+    <h2>Comparación</h2>
+    <p class="leyenda">
+      <span style="background: #ffb3b3;">Rojo: está en la referencia y falta en la etiqueta</span>
+      <span style="background: #a3d9ff;">Azul: está en la etiqueta y no está en la referencia</span>
+    </p>
+
+    <h3>Información de referencia</h3>
+    <div class="documento">
+      
+        <mark class="falta">Ficha</mark
+        >
+      
+        <mark class="falta">tecnica</mark
+        >
+      
+        <mark class="falta">de</mark
+        >
+      
+        <mark class="falta">referencia</mark
+        >
+      
+        <mark class="falta">Producto:</mark
+        >
+      
+        Galletas
+      
+        de
+      
+        avena
+      
+        Ingredientes:
+      
+        Harina
+      
+        de
+      
+        trigo,
+      
+        avena,
+      
+        azucar,
+      
+        aceite
+      
+        vegetal,
+      
+        <mark class="falta">sal,</mark
+        >
+      
+        <mark class="falta">polvo</mark
+        >
+      
+        <mark class="falta">de</mark
+        >
+      
+        <mark class="falta">hornear.</mark
+        >
+      
+        Contenido
+      
+        neto:
+      
+        200
+      
+        g
+      
+        <mark class="falta">Alergenos:</mark
+        >
+      
+        Contiene
+      
+        gluten.
+      
+        <mark class="falta">Puede</mark
+        >
+      
+        <mark class="falta">contener</mark
+        >
+      
+        <mark class="falta">trazas</mark
+        >
+      
+        <mark class="falta">de</mark
+        >
+      
+        <mark class="falta">nuez.</mark
+        >
+      
+    </div>
+
+    <h3>Arte de la etiqueta</h3>
+    <div class="documento">
+      
+        <mark class="extra">Etiqueta</mark
+        >
+      
+        <mark class="extra">-</mark
+        >
+      
+        Galletas
+      
+        de
+      
+        Avena
+      
+        Ingredientes:
+      
+        Harina
+      
+        de
+      
+        trigo,
+      
+        avena,
+      
+        azucar,
+      
+        aceite
+      
+        vegetal,
+      
+        <mark class="extra">sal.</mark
+        >
+      
+        Contenido
+      
+        neto:
+      
+        200
+      
+        g
+      
+        Contiene
+      
+        gluten.
+      
+    </div>
+
+    <p><a href="/">Volver a subir archivos</a></p>
+  </body>
+</html>
