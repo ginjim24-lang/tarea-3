@@ -2,30 +2,106 @@
 <html lang="es">
   <head>
     <meta charset="utf-8" />
-    <title>Tarea 3 - Flask MVC</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Verifica Etiqueta</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   </head>
   <body>
-    <h1>{{ message }}</h1>
-
-    {% if errores %}
-    <ul style="color: red;">
-      {% for error in errores %}
-      <li>{{ error }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-
-    <h2>Comparar información de referencia vs. etiqueta</h2>
-    <form action="/comparar" method="post" enctype="multipart/form-data">
-      <p>
-        <label for="referencia">Información escrita de referencia (PDF):</label><br />
-        <input type="file" id="referencia" name="referencia" accept="application/pdf" required />
+    <header class="app-header">
+      <div class="app-header__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="5" y="3" width="14" height="18" rx="2"></rect>
+          <path d="M9 3h6v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V3z"></path>
+          <path d="M8.5 12.5l2 2 5-5"></path>
+        </svg>
+      </div>
+      <h1>Verifica Etiqueta</h1>
+      <p class="app-header__subtitle">
+        Compara la información de referencia contra el arte de una etiqueta de producto alimenticio
       </p>
-      <p>
-        <label for="etiqueta">Arte de la etiqueta del producto (PDF):</label><br />
-        <input type="file" id="etiqueta" name="etiqueta" accept="application/pdf" required />
-      </p>
-      <button type="submit">Comparar</button>
-    </form>
+    </header>
+
+    <main class="container">
+      {% if errores %}
+      <div class="alert-error">
+        <ul>
+          {% for error in errores %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      <section class="card">
+        <h2>Sube los documentos en PDF</h2>
+        <p class="muted">
+          Selecciona la ficha de información de referencia y el arte de la etiqueta para compararlos.
+        </p>
+
+        <form action="/comparar" method="post" enctype="multipart/form-data">
+          <div class="upload-grid">
+            <div class="upload-box">
+              <label class="upload-btn" for="referencia">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 16V4"></path>
+                  <path d="M7 9l5-5 5 5"></path>
+                  <path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"></path>
+                </svg>
+                Subir información de referencia
+              </label>
+              <input
+                type="file"
+                id="referencia"
+                name="referencia"
+                accept="application/pdf"
+                required
+              />
+              <span class="file-name" id="referencia-nombre">Ningún archivo seleccionado</span>
+            </div>
+
+            <div class="upload-box">
+              <label class="upload-btn" for="etiqueta">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 16V4"></path>
+                  <path d="M7 9l5-5 5 5"></path>
+                  <path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"></path>
+                </svg>
+                Subir arte de la etiqueta
+              </label>
+              <input
+                type="file"
+                id="etiqueta"
+                name="etiqueta"
+                accept="application/pdf"
+                required
+              />
+              <span class="file-name" id="etiqueta-nombre">Ningún archivo seleccionado</span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 3v14"></path>
+              <path d="M4 7l4-4 4 4"></path>
+              <path d="M16 21V7"></path>
+              <path d="M12 17l4 4 4-4"></path>
+            </svg>
+            Comparar
+          </button>
+        </form>
+      </section>
+    </main>
+
+    <script>
+      function mostrarNombreArchivo(idInput, idTexto) {
+        var input = document.getElementById(idInput);
+        var texto = document.getElementById(idTexto);
+        input.addEventListener("change", function () {
+          texto.textContent = input.files.length ? input.files[0].name : "Ningún archivo seleccionado";
+        });
+      }
+      mostrarNombreArchivo("referencia", "referencia-nombre");
+      mostrarNombreArchivo("etiqueta", "etiqueta-nombre");
+    </script>
   </body>
 </html>

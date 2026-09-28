@@ -2,73 +2,87 @@
 <html lang="es">
   <head>
     <meta charset="utf-8" />
-    <title>Resultado - Tarea 3</title>
-    <style>
-      .documento {
-        background: #f4f4f4;
-        padding: 1rem;
-        line-height: 1.8;
-        max-height: 400px;
-        overflow-y: auto;
-      }
-      mark.falta {
-        background: #ffb3b3; /* falta en la etiqueta */
-      }
-      mark.extra {
-        background: #a3d9ff; /* aparece solo en la etiqueta */
-      }
-      mark.ortografia {
-        background: #fff59d; /* posible falta ortografica */
-      }
-      .leyenda span {
-        padding: 0.2rem 0.5rem;
-        margin-right: 1rem;
-        border-radius: 4px;
-      }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Resultado - Verifica Etiqueta</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   </head>
   <body>
-    <h1>Archivos recibidos correctamente</h1>
-    <ul>
-      <li>Información de referencia: {{ referencia_nombre }}</li>
-      <li>Arte de la etiqueta: {{ etiqueta_nombre }}</li>
-    </ul>
+    <header class="app-header">
+      <div class="app-header__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="5" y="3" width="14" height="18" rx="2"></rect>
+          <path d="M9 3h6v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V3z"></path>
+          <path d="M8.5 12.5l2 2 5-5"></path>
+        </svg>
+      </div>
+      <h1>Verifica Etiqueta</h1>
+      <p class="app-header__subtitle">Resultado de la comparación</p>
+    </header>
 
-    <h2>Comparación</h2>
-    <p class="leyenda">
-      <span style="background: #ffb3b3;">Rojo: está en la referencia y falta en la etiqueta</span>
-      <span style="background: #a3d9ff;">Azul: está en la etiqueta y no está en la referencia</span>
-      <span style="background: #fff59d;">Amarillo: posible falta ortográfica en la etiqueta</span>
-    </p>
+    <main class="container">
+      <section class="card">
+        <h2>Archivos analizados</h2>
+        <ul class="file-summary">
+          <li><strong>Información de referencia:</strong> {{ referencia_nombre }}</li>
+          <li><strong>Arte de la etiqueta:</strong> {{ etiqueta_nombre }}</li>
+        </ul>
+      </section>
 
-    <h3>Información de referencia</h3>
-    <div class="documento">
-      {% for palabra in palabras_referencia %}
-        {% if palabra.estado == "falta_en_etiqueta" %}<mark class="falta">{{ palabra.texto }}</mark
-        >{% else %}{{ palabra.texto }}{% endif %}
-      {% endfor %}
-    </div>
+      <section class="card">
+        <h2>¿Qué significan los colores?</h2>
+        <div class="legend">
+          <span class="legend-item">
+            <span class="legend-swatch legend-swatch--falta"></span>
+            Está en la referencia y falta en la etiqueta
+          </span>
+          <span class="legend-item">
+            <span class="legend-swatch legend-swatch--extra"></span>
+            Está en la etiqueta y no está en la referencia
+          </span>
+          <span class="legend-item">
+            <span class="legend-swatch legend-swatch--ortografia"></span>
+            Posible falta ortográfica en la etiqueta
+          </span>
+        </div>
+      </section>
 
-    <h3>Arte de la etiqueta</h3>
-    <div class="documento">
-      {% for palabra in palabras_etiqueta %}
-        {% if palabra.es_sospechosa %}<mark class="ortografia">{{ palabra.texto }}</mark
-        >{% elif palabra.estado == "solo_en_etiqueta" %}<mark class="extra">{{ palabra.texto }}</mark
-        >{% else %}{{ palabra.texto }}{% endif %}
-      {% endfor %}
-    </div>
+      <section class="comparison-grid">
+        <div class="card">
+          <h3>Información de referencia</h3>
+          <div class="documento">
+            {% for palabra in palabras_referencia %}
+              {% if palabra.estado == "falta_en_etiqueta" %}<mark class="falta">{{ palabra.texto }}</mark
+              >{% else %}{{ palabra.texto }}{% endif %}
+            {% endfor %}
+          </div>
+        </div>
 
-    <h3>Posibles faltas ortográficas en la etiqueta</h3>
-    {% if palabras_sospechosas %}
-    <ul>
-      {% for palabra in palabras_sospechosas %}
-      <li>{{ palabra }}</li>
-      {% endfor %}
-    </ul>
-    {% else %}
-    <p>No se detectaron palabras sospechosas.</p>
-    {% endif %}
+        <div class="card">
+          <h3>Arte de la etiqueta</h3>
+          <div class="documento">
+            {% for palabra in palabras_etiqueta %}
+              {% if palabra.es_sospechosa %}<mark class="ortografia">{{ palabra.texto }}</mark
+              >{% elif palabra.estado == "solo_en_etiqueta" %}<mark class="extra">{{ palabra.texto }}</mark
+              >{% else %}{{ palabra.texto }}{% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </section>
 
-    <p><a href="/">Volver a subir archivos</a></p>
+      <section class="card">
+        <h2>Posibles faltas ortográficas en la etiqueta</h2>
+        {% if palabras_sospechosas %}
+        <ul class="chip-list">
+          {% for palabra in palabras_sospechosas %}
+          <li>{{ palabra }}</li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p class="muted">No se detectaron palabras sospechosas.</p>
+        {% endif %}
+      </section>
+
+      <a class="btn-secondary" href="/">&larr; Volver a subir archivos</a>
+    </main>
   </body>
 </html>
