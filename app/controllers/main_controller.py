@@ -31,8 +31,13 @@ def comparar():
     referencia.save(upload_folder)
     etiqueta.save(upload_folder)
 
+    texto_referencia = referencia.extract_text()
+    texto_etiqueta = etiqueta.extract_text()
+
     return render_template(
         "resultado.html",
         referencia_nombre=referencia.filename,
         etiqueta_nombre=etiqueta.filename,
+        texto_referencia=texto_referencia,
+        texto_etiqueta=texto_etiqueta,
     )

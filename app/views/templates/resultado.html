@@ -3,6 +3,16 @@
   <head>
     <meta charset="utf-8" />
     <title>Resultado - Tarea 3</title>
+    <style>
+      pre {
+        background: #f4f4f4;
+        padding: 1rem;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        max-height: 400px;
+        overflow-y: auto;
+      }
+    </style>
   </head>
   <body>
     <h1>Archivos recibidos correctamente</h1>
@@ -10,6 +20,21 @@
       <li>Información de referencia: {{ referencia_nombre }}</li>
       <li>Arte de la etiqueta: {{ etiqueta_nombre }}</li>
     </ul>
+
+    <h2>Texto extraído de la información de referencia</h2>
+    {% if texto_referencia %}
+    <pre>{{ texto_referencia }}</pre>
+    {% else %}
+    <p><em>No se pudo extraer texto de este PDF (puede ser una imagen escaneada).</em></p>
+    {% endif %}
+
+    <h2>Texto extraído del arte de la etiqueta</h2>
+    {% if texto_etiqueta %}
+    <pre>{{ texto_etiqueta }}</pre>
+    {% else %}
+    <p><em>No se pudo extraer texto de este PDF (puede ser una imagen escaneada).</em></p>
+    {% endif %}
+
     <p>La comparación entre los documentos se implementará en la siguiente etapa.</p>
     <p><a href="/">Volver a subir archivos</a></p>
   </body>
